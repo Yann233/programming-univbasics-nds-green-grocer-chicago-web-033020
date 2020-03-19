@@ -135,12 +135,16 @@ Float: a total of the cart
 # some irritated customers
 =end
 def checkout(cart, coupons)
+#we should first create a new consolidated cart using the consolidate_cart method.
 consolidated_cart = consolidate_cart(cart)
+#We should pass the newly consolidated cart to apply_coupons and then send it to apply_clearance.
 couponed_cart = apply_coupons(consolidated_cart, coupons)
 final_cart = apply_clearance(couponed_cart)
   total_price=0
   i=0
+  #With all the discounts applied, we should loop through the "consolidated and discounts-applied" cart
     while i<final_cart.length
+  #and multiply each item Hash's price by its count and accumulate that to a grand total.
     total_price += final_cart[i][:price]*final_cart[i][:count]
     i+=1
     end
